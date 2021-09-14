@@ -12,7 +12,7 @@ import com.algaworks.algafood.di.notificacao.Notificador;
 public class AtivacaoClienteService {
 	
 	@Autowired
-	private List<Notificador> notificadores;
+	private Notificador notificador;
 	
 	//	@Autowired
 //	public AtivacaoClienteService(Notificador notificador) {
@@ -21,8 +21,7 @@ public class AtivacaoClienteService {
 
 	public void ativar(Cliente cliente) {
 		cliente.ativar();
-		for(Notificador notificador : notificadores) {
+
 		notificador.notificar(cliente, "Seu cadastro no sistema está ativo!");
-		}
 	}
 }
