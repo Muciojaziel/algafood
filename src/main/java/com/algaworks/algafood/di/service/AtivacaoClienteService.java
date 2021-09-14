@@ -12,7 +12,7 @@ import com.algaworks.algafood.di.notificacao.Notificador;
 @Component
 public class AtivacaoClienteService {
 	
-	@Qualifier("email")
+	@Qualifier("urgente")
 	@Autowired
 	private Notificador notificador;
 	

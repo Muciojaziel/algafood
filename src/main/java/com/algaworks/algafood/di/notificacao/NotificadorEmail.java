@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 
 import com.algaworks.algafood.di.modelo.Cliente;
 
-@Qualifier("email")
+@Qualifier("normal")
 @Component
 public class NotificadorEmail implements Notificador {
 	
