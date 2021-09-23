@@ -34,3 +34,8 @@ build/
 
 ### POM ###
 pom.xml
+
+*.jar
+lib
+lib/
+
