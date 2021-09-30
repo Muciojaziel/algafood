@@ -8,7 +8,7 @@ import javax.persistence.PersistenceContext;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.algaworks.algafood.domain.Repository.PermissaoRepository;
+import com.algaworks.algafood.domain.repository.PermissaoRepository;
 import com.algaworks.algafood.domain.model.Permissao;
 
 @Component
@@ -37,6 +37,6 @@ public class PermissaoRepositoryImpl implements PermissaoRepository {
 	@Override
 	public void remover(Permissao permissao) {
 		permissao = buscar(permissao.getId());
-		manager.remove(permissao);;
+		manager.remove(permissao);
 	}
 }
