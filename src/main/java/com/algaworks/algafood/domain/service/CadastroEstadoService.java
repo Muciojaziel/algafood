@@ -19,11 +19,11 @@ public class CadastroEstadoService {
     @Autowired
     private CidadeRepository cidadeRepository;
 
-    public Estado salvar(Estado estado){ return estadosRepository.salvar(estado);}
+    public Estado salvar(Estado estado){ return estadosRepository.save(estado);}
 
     public void excluir(Long estadoId) {
         try {
-            estadosRepository.remover(estadoId);
+            estadosRepository.deleteById(estadoId);
         } catch (EmptyResultDataAccessException e) {
             throw new EntidadeNaoEncontradaException(
                     String.format("Não existe um cadastro de estado com código %d", estadoId));

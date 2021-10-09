@@ -1,6 +1,7 @@
 package com.algaworks.algafood.api.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.algaworks.algafood.domain.exception.EntidadeEmUsoException;
 import com.algaworks.algafood.domain.exception.EntidadeNaoEncontradaException;
@@ -26,14 +27,14 @@ public class EstadoController {
 	
 	@GetMapping
 	public List<Estado> listar(){
-		return estadosRepository.listar();
+		return estadosRepository.findAll();
 	}
 
 	@GetMapping("/{estadoId}")
 	public ResponseEntity<Estado> buscar(@PathVariable Long estadoId){
-		Estado estado = estadosRepository.buscar(estadoId);
-		if(estado != null) {
-			return ResponseEntity.ok(estado);
+		Optional<Estado> estado = estadosRepository.findById(estadoId);
+		if(estado.isPresent()) {
+			return ResponseEntity.ok(estado.get());
 		}
 		return ResponseEntity.notFound().build();
 	}
@@ -46,7 +47,7 @@ public class EstadoController {
 
 	@PutMapping("/{estadoId}")
 	public ResponseEntity<Estado> atualizar(@PathVariable Long estadoId, @RequestBody Estado estado){
-		Estado estadoAtual = estadosRepository.buscar(estadoId);
+		Estado estadoAtual = estadosRepository.findById(estadoId).orElse(null);
 		if(estadoAtual != null){
 			BeanUtils.copyProperties(estado, estadoAtual, "id");
 			estadoAtual = estadoService.salvar(estadoAtual);
