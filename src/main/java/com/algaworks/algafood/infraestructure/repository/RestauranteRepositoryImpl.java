@@ -20,17 +20,17 @@ public class RestauranteRepositoryImpl implements RestauranteRepositoryQueries {
 
     @Override
     public List<Restaurante> find(String nome, BigDecimal taxaFreteInicial, BigDecimal taxaFreteFinal){
-
+        var regraTaxa = verificarTaxa(taxaFreteInicial, taxaFreteFinal); // tratar essa exceção
         var jpql = new StringBuilder();
         var parametros = new HashMap<String, Object>();
         jpql.append("from Restaurante where 0 = 0 ");
 
         if(StringUtils.hasLength(nome)){
             jpql.append("and nome like :nome ");
-            parametros.put("nome", "%"+ nome + "%");
+            parametros.put("nome", "%" + nome + "%");
         }
 
-        if(taxaFreteInicial != null){
+        if(taxaFreteInicial != null) {
             jpql.append("and taxaFrete >= :taxaInicial ");
             parametros.put("taxaInicial", taxaFreteInicial);
         }
@@ -46,4 +46,9 @@ public class RestauranteRepositoryImpl implements RestauranteRepositoryQueries {
 
         return query.getResultList();
     }
+
+    private boolean verificarTaxa(BigDecimal taxaFreteInicial, BigDecimal taxaFreteFinal) {
+        return Boolean.parseBoolean(taxaFreteInicial.max(taxaFreteFinal).toString());
+    }
+
 }
