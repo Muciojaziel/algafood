@@ -80,4 +80,9 @@ public class TesteController {
                 .and(comNomeSemelhante(nome)));
     }
 
+    @GetMapping("/restaurantes/buscar-primeiro")
+    public Optional<Restaurante> restaurantesBuscarPrimeiro() {
+        return restauranteRepository.buscarPrimeiro();
+    }
+
 }
