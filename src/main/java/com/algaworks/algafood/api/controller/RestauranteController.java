@@ -36,16 +36,17 @@ public class RestauranteController {
 	@GetMapping("/{restauranteId}")
 	public ResponseEntity<Restaurante> buscar(@PathVariable Long restauranteId) {
 		Optional<Restaurante> restaurante = restauranteRepository.findById(restauranteId);
+
 		if(restaurante.isPresent()) {
 			return ResponseEntity.ok(restaurante.get());
 		}
+
 		return ResponseEntity.notFound().build();
 	}
 	
 	@PostMapping
 	public ResponseEntity<?> adicionar(@RequestBody Restaurante restaurante){
 		try {
-			
 			restaurante = cadastroRestaurante.salvar(restaurante);
 			
 			return ResponseEntity.status(HttpStatus.CREATED)
@@ -61,6 +62,7 @@ public class RestauranteController {
 	public ResponseEntity<?> atualizar(@PathVariable Long restauranteId, @RequestBody Restaurante restaurante){
 		try {
 				Restaurante restauranteAtual = restauranteRepository.findById(restauranteId).orElse(null);
+
 				if(restauranteAtual != null) {
 					BeanUtils.copyProperties(restaurante, restauranteAtual, "id");
 

@@ -50,9 +50,11 @@ public class EstadoController {
 		Estado estadoAtual = estadosRepository.findById(estadoId).orElse(null);
 		if(estadoAtual != null){
 			BeanUtils.copyProperties(estado, estadoAtual, "id");
+
 			estadoAtual = estadoService.salvar(estadoAtual);
 			return ResponseEntity.ok(estadoAtual);
 		}
+
 		return ResponseEntity.notFound().build();
 	}
 
@@ -61,8 +63,10 @@ public class EstadoController {
 		try {
 			estadoService.excluir(estadoId);
 			return ResponseEntity.noContent().build();
+
 		} catch (EntidadeNaoEncontradaException e){
 			return ResponseEntity.notFound().build();
+
 		} catch (EntidadeEmUsoException e) {
 			return ResponseEntity.status(HttpStatus.CONFLICT)
 					.body(e.getMessage());
