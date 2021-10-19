@@ -1,23 +1,25 @@
-insert into cozinha (id, nome) values (1, 'Tailandesa')
-insert into cozinha (id, nome) values (2, 'CozTech')
-insert into cozinha (id, nome) values (3, 'Chinesa')
+insert into cozinha (id, nome) values (1, 'Tailandesa');
+insert into cozinha (id, nome) values (2, 'Indiana');
 
-insert into restaurante (nome, taxa_frete, cozinha_id) values ('MariRestaurante', 13, 1)
-insert into restaurante (nome, taxa_frete, cozinha_id) values ('RestDev', 10, 2)
-insert into restaurante (nome, taxa_frete, cozinha_id) values ('RestCHin', 13, 3)
+insert into restaurante (id, nome, taxa_frete, cozinha_id) values (1, 'Thai Gourmet', 10, 1);
+insert into restaurante (id, nome, taxa_frete, cozinha_id) values (2, 'Thai Delivery', 9.50, 1);
+insert into restaurante (id, nome, taxa_frete, cozinha_id) values (3, 'Tuk Tuk Comida Indiana', 15, 2);
 
-insert into forma_pagamento (descricao) values ('A vista')
-insert into forma_pagamento (descricao) values ('Cartao')
-insert into forma_pagamento (descricao) values ('Boleto')
+insert into estado (id, nome) values (1, 'Minas Gerais');
+insert into estado (id, nome) values (2, 'São Paulo');
+insert into estado (id, nome) values (3, 'Ceará');
 
-insert into permissao (nome, descricao) values ('Admin','Administrador')
-insert into permissao (nome, descricao) values ('Colab','Colaborador')
-insert into permissao (nome, descricao) values ('Teste','Teste inserindo perfil')
+insert into cidade (id, nome, estado_id) values (1, 'Uberlândia', 1);
+insert into cidade (id, nome, estado_id) values (2, 'Belo Horizonte', 1);
+insert into cidade (id, nome, estado_id) values (3, 'São Paulo', 2);
+insert into cidade (id, nome, estado_id) values (4, 'Campinas', 2);
+insert into cidade (id, nome, estado_id) values (5, 'Fortaleza', 3);
 
-insert into estado (nome) values ('PE')
-insert into estado (nome) values ('AL')
-insert into estado (nome) values ('RN')
+insert into forma_pagamento (id, descricao) values (1, 'Cartão de crédito');
+insert into forma_pagamento (id, descricao) values (2, 'Cartão de débito');
+insert into forma_pagamento (id, descricao) values (3, 'Dinheiro');
 
-insert into cidade (nome) values ('Quipapa')
-insert into cidade (nome) values ('Garanhuns')
-insert into cidade (nome) values ('Recife')
+insert into permissao (id, nome, descricao) values (1, 'CONSULTAR_COZINHAS', 'Permite consultar cozinhas');
+insert into permissao (id, nome, descricao) values (2, 'EDITAR_COZINHAS', 'Permite editar cozinhas');
+
+insert into restaurante_forma_pagamento (restaurante_id, forma_pagamento_id) values (1, 1), (1, 2), (1, 3), (2, 3), (3, 2), (3, 3);
