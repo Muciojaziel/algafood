@@ -31,6 +31,14 @@ public class RestauranteController {
 	@GetMapping
 	public List<Restaurante> listar(){
 		return restauranteRepository.findAll();
+//		//Pra testar Lazy Loading
+//		List<Restaurante> restaurantes = restauranteRepository.findAll();
+//		System.out.println("O nome da cozinha é: ");
+//		System.out.println(restaurantes.get(0).getCozinha().getNome());
+//
+//
+//
+//		return restaurantes;
 	}
 	
 	@GetMapping("/{restauranteId}")
@@ -64,7 +72,7 @@ public class RestauranteController {
 				Restaurante restauranteAtual = restauranteRepository.findById(restauranteId).orElse(null);
 
 				if(restauranteAtual != null) {
-					BeanUtils.copyProperties(restaurante, restauranteAtual, "id", "formasPagamento", "endereco", "dataCadastro");
+					BeanUtils.copyProperties(restaurante, restauranteAtual, "id", "formasPagamento", "endereco", "dataCadastro", "produtos");
 
 					restauranteAtual = cadastroRestaurante.salvar(restauranteAtual);
 					return ResponseEntity.ok(restauranteAtual);
