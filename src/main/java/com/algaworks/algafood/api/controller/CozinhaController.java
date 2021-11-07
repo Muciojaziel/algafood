@@ -22,6 +22,7 @@ import com.algaworks.algafood.domain.exception.EntidadeEmUsoException;
 import com.algaworks.algafood.domain.exception.EntidadeNaoEncontradaException;
 import com.algaworks.algafood.domain.model.Cozinha;
 import com.algaworks.algafood.domain.service.CadastroCozinhaService;
+import org.springframework.web.server.ResponseStatusException;
 
 @RestController
 @RequestMapping(value = "/cozinhas")
@@ -87,7 +88,7 @@ public class CozinhaController {
 		@DeleteMapping("/{cozinhaId}")
 		@ResponseStatus(HttpStatus.NO_CONTENT) // reason =  "Entidade não encontrada")
 		public void remover(@PathVariable Long cozinhaId) {
-			cadastroCozinha.excluir(cozinhaId);
+				cadastroCozinha.excluir(cozinhaId);
 		}
 
 }
