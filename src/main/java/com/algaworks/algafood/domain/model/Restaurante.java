@@ -8,6 +8,8 @@ import java.util.List;
 import javax.persistence.*;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
+import javax.validation.groups.ConvertGroup;
+import javax.validation.groups.Default;
 
 import com.algaworks.algafood.Groups;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -29,17 +31,18 @@ public class Restaurante {
 
 //	@NotNull
 //	@NotEmpty
-	@NotBlank(groups = Groups.CadastroRestaurante.class)
+	@NotBlank
 	@Column(nullable = false)
 	private String nome;
 
 //	@DecimalMin("1")
-	@PositiveOrZero(groups = Groups.CadastroRestaurante.class)
+	@PositiveOrZero
 	@Column(name = "taxa_frete", nullable = false)
 	private BigDecimal taxaFrete;
 
 	@Valid
-	@NotNull(groups = Groups.CadastroRestaurante.class)
+	@ConvertGroup(from = Default.class, to = Groups.CadastroRestaurante.class)
+	@NotNull
 //	@JsonIgnore
 	@JsonIgnoreProperties("hibernateLazyInitializer")
 	@ManyToOne //(fetch = FetchType.LAZY)
