@@ -31,7 +31,7 @@ public class Restaurante {
 
 //	@NotNull
 //	@NotEmpty
-	@NotBlank
+	@NotBlank // (message = "Campo nome obrigatório")
 	@Column(nullable = false)
 	private String nome;
 
