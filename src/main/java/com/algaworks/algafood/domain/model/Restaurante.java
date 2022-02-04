@@ -11,7 +11,7 @@ import javax.validation.constraints.*;
 import javax.validation.groups.ConvertGroup;
 import javax.validation.groups.Default;
 
-import com.algaworks.algafood.Groups;
+import com.algaworks.algafood.core.validation.Groups;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
@@ -37,7 +37,7 @@ public class Restaurante {
 
 //	@DecimalMin("1")
 	@NotNull
-	@PositiveOrZero(message = "{TaxaFrete.invalida}")
+	@PositiveOrZero //(message = "{TaxaFrete.invalida}")
 	@Column(name = "taxa_frete", nullable = false)
 	private BigDecimal taxaFrete;
 
@@ -45,7 +45,7 @@ public class Restaurante {
 	@ConvertGroup(from = Default.class, to = Groups.CozinhaId.class)
 	@NotNull
 //	@JsonIgnore
-	@JsonIgnoreProperties("hibernateLazyInitializer")
+//	@JsonIgnoreProperties("hibernateLazyInitializer")
 	@ManyToOne //(fetch = FetchType.LAZY)
 	@JoinColumn(name = "cozinha_id", nullable = false) //  exemplo para renomear as colunas
 	private Cozinha cozinha;
