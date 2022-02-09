@@ -13,7 +13,7 @@ import java.lang.annotation.*;
 )
 public @interface ValorZeroIncluiDescricao {
 
-    String message() default "{descrição obrigatória inválida}";
+    String message() default "descrição obrigatória inválida";
 
     Class<?>[] groups() default {};
 
