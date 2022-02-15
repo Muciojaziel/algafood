@@ -101,48 +101,13 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
     protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers,
                                                              HttpStatus status,WebRequest request){
 
-//        ProblemType problemType = ProblemType.DADOS_INVALIDOS;
-//        String detail = String.format("Um ou mais campos estão inválidos. Faça o preenchimento correto e tente " +
-//                "novamente");
-//
-//        BindingResult bindingResult = ex.getBindingResult();
-//
-//         List<Problem.Object> problemObjects =  bindingResult.getAllErrors().stream()
-//                .map(objectError -> {
-//                    String message = messageSource.getMessage(objectError, LocaleContextHolder.getLocale());
-//
-//                    String name = objectError.getObjectName();
-//
-//                    if(objectError instanceof FieldError) {
-//                        name = ((FieldError) objectError).getField();
-//                    }
-//                    return Problem.Object.builder()
-//                            .name(name)
-//                            .userMessage(message) //fieldError.getDefaultMessage()
-//                            .build();
-//
-//                })
-//                .collect(Collectors.toList());
-//
-//        Problem problem = createProblemBuilder(status, problemType, detail)
-//                .userMessage(detail)
-//                .objects(problemObjects)
-//                .build();
-
-        return handleValidationInternal(ex, ex.getBindingResult(), headers, status, request);
-    }
-
-    private ResponseEntity<Object> handleValidationInternal(Exception ex, BindingResult bindingResult, HttpHeaders headers,
-                                                              HttpStatus status, WebRequest request){
-
-
         ProblemType problemType = ProblemType.DADOS_INVALIDOS;
         String detail = String.format("Um ou mais campos estão inválidos. Faça o preenchimento correto e tente " +
                 "novamente");
 
-//        BindingResult bindingResult = ex.getBindingResult();
+        BindingResult bindingResult = ex.getBindingResult();
 
-        List<Problem.Object> problemObjects =  bindingResult.getAllErrors().stream()
+         List<Problem.Object> problemObjects =  bindingResult.getAllErrors().stream()
                 .map(objectError -> {
                     String message = messageSource.getMessage(objectError, LocaleContextHolder.getLocale());
 
@@ -164,12 +129,7 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
                 .objects(problemObjects)
                 .build();
 
-        return handleExceptionInternal(ex, problem, headers, status, request);
-    }
-
-    @ExceptionHandler({ ValidacaoException.class })
-    public ResponseEntity<Object> handleValidacaoExpection(ValidacaoException ex, WebRequest request) {
-        return handleValidationInternal(ex, ex.getBindingResult(), new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
+        return handleExceptionInternal(ex, ex.getBindingResult(), headers, status, request);
     }
 
     private ResponseEntity<Object> handleInvalidFormat(InvalidFormatException ex, HttpHeaders headers,
