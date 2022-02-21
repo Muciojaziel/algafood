@@ -2,29 +2,39 @@ package com.algaworks.algafood;
 
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
+import org.flywaydb.core.Flyway;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.http.HttpStatus;
+import org.springframework.test.context.TestPropertySource;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.hasItems;
 import static org.hamcrest.Matchers.hasSize;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@TestPropertySource("/application-test.properties")
 public class CadastroCozinhaIT {
 
 	@LocalServerPort
 	private int port;
 
+	@Autowired
+	private Flyway flyway;
+
 	@BeforeEach
 	public void setUp(){
 		//Habilita um log
 		RestAssured.enableLoggingOfRequestAndResponseIfValidationFails();
+		//
 		RestAssured.port = port;
 		RestAssured.basePath = "/cozinhas";
+
+		flyway.migrate();
 	}
 
 	@Test
@@ -44,10 +54,10 @@ public class CadastroCozinhaIT {
 			.when()
 				.get()
 			.then()
-					//Matchers.hasSize(4) -- import estatico
-					.body("", hasSize(4))
-					//Matchers.hasItems("Indiana", "Tailandesa")
-					.body("nome", hasItems("Indiana", "Tailandesa"));
+				//Matchers.hasSize(4) -- import estatico
+				.body("", hasSize(4))
+				//Matchers.hasItems("Indiana", "Tailandesa")
+				.body("nome", hasItems("Indiana", "Tailandesa"));
 	}
 
 	@Test
