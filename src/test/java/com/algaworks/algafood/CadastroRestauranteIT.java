@@ -8,11 +8,16 @@ import io.restassured.http.ContentType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.http.HttpStatus;
+import org.springframework.test.context.TestPropertySource;
 
 import static io.restassured.RestAssured.given;
 
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@TestPropertySource("/application-test.properties")
 public class CadastroRestauranteIT {
     @LocalServerPort
     private int port;
@@ -25,15 +30,13 @@ public class CadastroRestauranteIT {
 
     private String jsonCorretoRestauranteTeste;
 
-    @Autowired
-
     @BeforeEach
     public void setUp(){
         //Habilita um log
         RestAssured.enableLoggingOfRequestAndResponseIfValidationFails();
 
         RestAssured.port = port;
-        RestAssured.basePath = "/cozinhas";
+        RestAssured.basePath = "/restaurantes";
 
         databaseCleaner.clearTables();
 //        prepararDados();
