@@ -77,7 +77,7 @@ public class CadastroCozinhaIT {
 	@Test
 	public void deveRetornarRespostaEStatusCorretos_QuandoConsultarCozinhaExistente(){
 			given()
-				.pathParams("cozinhaId", cozinhaAmericana.getId())
+				.pathParam("cozinhaId", cozinhaAmericana.getId())
 				.accept(ContentType.JSON)
 			.when()
 				.get("/{cozinhaId}")
@@ -87,9 +87,9 @@ public class CadastroCozinhaIT {
 	}
 
 	@Test
-	public void deveRetornarStatus400_QuandoCozinhaInexistente(){
+	public void deveRetornarStatus404_QuandoConsultarCozinhaInexistente(){
 			given()
-				.pathParams("cozinhaId", COZINHA_ID_INEXISTENTE)
+				.pathParam("cozinhaId", COZINHA_ID_INEXISTENTE)
 				.accept(ContentType.JSON)
 			.when()
 				.get("/{cozinhaId}")

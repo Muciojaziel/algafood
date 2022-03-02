@@ -1,0 +1,7 @@
+{
+  "nome": "Restaurante Teste Incorreto",
+  "taxaFrete": 33,
+  "cozinha": {
+    "id": 200
+  }
+}
