@@ -1,4 +1,4 @@
-package com.algaworks.algafood.core.validation;
+package com.algaworks.algafood.domain.validation;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;

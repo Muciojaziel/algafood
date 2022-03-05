@@ -1,18 +1,19 @@
-package com.algaworks.algafood.core.validation;
+package com.algaworks.algafood.domain.validation;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;
 import javax.validation.constraints.PositiveOrZero;
 import java.lang.annotation.*;
 
-@Target({ElementType.METHOD, ElementType.FIELD, ElementType.ANNOTATION_TYPE, ElementType.CONSTRUCTOR, ElementType.PARAMETER, ElementType.TYPE_USE})
+@Target({ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 @Constraint(
-        validatedBy = { MultiploValidator.class }
+        validatedBy = { ValorZeroIncluiDescricaoValidator.class }
 )
-public @interface Multiplo {
-    String message() default "Multiplo inválido";
+public @interface ValorZeroIncluiDescricao {
+
+    String message() default "descrição obrigatória inválida";
 
     Class<?>[] groups() default {};
 
@@ -25,5 +26,7 @@ public @interface Multiplo {
         PositiveOrZero[] value();
     }
 
-    int numero();
+    String valorField();
+    String descricaoField();
+    String descricaoObrigatoria();
 }
