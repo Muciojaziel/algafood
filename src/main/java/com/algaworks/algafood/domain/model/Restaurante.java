@@ -32,25 +32,20 @@ public class Restaurante {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)		
 	private Long id;
 
-//	@NotNull
-//	@NotEmpty
-	@NotBlank // (message = "Campo nome obrigatório")
+	@NotBlank
 	@Column(nullable = false)
 	private String nome;
 
-	@PositiveOrZero //(message = "{TaxaFrete.invalida}")
 	@NotNull
 	@Column(name = "taxa_frete", nullable = false)
 	private BigDecimal taxaFrete;
-//	@DecimalMin("1")
 
+	@JsonIgnoreProperties(value = "nome", allowGetters = true) // Retorna propriedade nome quando Get.
 	@Valid
 	@ConvertGroup(from = Default.class, to = Groups.CozinhaId.class)
 	@NotNull
-//	@JsonIgnore
-//	@JsonIgnoreProperties("hibernateLazyInitializer")
-	@ManyToOne //(fetch = FetchType.LAZY)
-	@JoinColumn(name = "cozinha_id", nullable = false) //  exemplo para renomear as colunas
+	@ManyToOne
+	@JoinColumn(name = "cozinha_id", nullable = false)
 	private Cozinha cozinha;
 
 	@JsonIgnore
