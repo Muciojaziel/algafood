@@ -38,12 +38,11 @@ public class Restaurante {
 	@Column(nullable = false)
 	private String nome;
 
-//	@DecimalMin("1")
-	@NotNull
 	@PositiveOrZero //(message = "{TaxaFrete.invalida}")
-	@Multiplo(numero = 5)
+	@NotNull
 	@Column(name = "taxa_frete", nullable = false)
 	private BigDecimal taxaFrete;
+//	@DecimalMin("1")
 
 	@Valid
 	@ConvertGroup(from = Default.class, to = Groups.CozinhaId.class)

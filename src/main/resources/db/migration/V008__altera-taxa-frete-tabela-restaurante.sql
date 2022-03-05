@@ -1,0 +1,1 @@
+alter table restaurante modify column taxa_frete decimal(10,2)

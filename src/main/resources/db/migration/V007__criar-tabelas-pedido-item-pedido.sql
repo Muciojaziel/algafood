@@ -1,7 +1,7 @@
 create table pedido (
     id                   bigint         not null auto_increment,
     subTotal             decimal(10, 2) not null,
-    taxaFrete            decimal(10, 2) not null,
+    taxaFrete            decimal(10, 2)  not null,
     valorTotal           decimal(10, 2) not null,
 
     restaurante_id       bigint         not null,
