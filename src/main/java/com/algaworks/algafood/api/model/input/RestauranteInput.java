@@ -13,8 +13,6 @@ import java.math.BigDecimal;
 @Getter
 public class RestauranteInput {
 
-    private Long id;
-
     @NotBlank
     private String nome;
 

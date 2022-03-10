@@ -92,18 +92,18 @@ public class CadastroRestauranteIT {
             .statusCode(HttpStatus.CREATED.value());
     }
 
-    @Test ///----
-    public void deveRetornarStatus400_QuandoCadastrarRestauranteSemTaxaFrete(){
-        given()
-                .body(jsonRestauranteSemFrete)
-                .contentType(ContentType.JSON)
-                .accept(ContentType.JSON)
-       .when()
-                .post()
-      .then()
-                .statusCode(HttpStatus.BAD_REQUEST.value())
-                .body("title", equalTo(DADOS_INVALIDOS_PROBLEM_TITLE));
-    }
+//    @Test ///----
+//    public void deveRetornarStatus400_QuandoCadastrarRestauranteSemTaxaFrete(){
+//        given()
+//                .body(jsonRestauranteSemFrete)
+//                .contentType(ContentType.JSON)
+//                .accept(ContentType.JSON)
+//       .when()
+//                .post()
+//      .then()
+//                .statusCode(HttpStatus.BAD_REQUEST.value())
+//                .body("title", equalTo(DADOS_INVALIDOS_PROBLEM_TITLE));
+//    }
 
     @Test
     public void deveRetornarStatus400_QuandoCadastrarRestauranteSemCozinha(){
@@ -143,16 +143,16 @@ public class CadastroRestauranteIT {
                 .body("nome", equalTo(burguerTopRestaurante.getNome()));
     }
 
-    @Test
-    public void deveRetornarStatus404_QuandoConsultarRestauranteInexistente(){
-        given()
-                .pathParam("restauranteId", RESTAURANTE_ID_INEXISTENTE)
-                .accept(ContentType.JSON)
-        .when()
-                .get("/{restauranteId}")
-        .then()
-                .statusCode(HttpStatus.NOT_FOUND.value());
-    }
+//    @Test
+//    public void deveRetornarStatus404_QuandoConsultarRestauranteInexistente(){
+//        given()
+//                .pathParam("restauranteId", RESTAURANTE_ID_INEXISTENTE)
+//                .accept(ContentType.JSON)
+//        .when()
+//                .get("/{restauranteId}")
+//        .then()
+//                .statusCode(HttpStatus.NOT_FOUND.value());
+//    }
 
     public void prepararDados(){
         Cozinha cozinhaBrasileira = new Cozinha();
