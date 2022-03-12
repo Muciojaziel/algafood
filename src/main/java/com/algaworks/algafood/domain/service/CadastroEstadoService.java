@@ -29,7 +29,7 @@ public class CadastroEstadoService {
     @Transactional
     public void excluir(Long estadoId) {
         try {
-            estadosRepository.deleteById(estadoId);
+            estadosRepository.deleteById(estadoId); estadosRepository.flush();
 
         } catch (EmptyResultDataAccessException e) {
             throw new EstadoNaoEncontradoException(estadoId);
