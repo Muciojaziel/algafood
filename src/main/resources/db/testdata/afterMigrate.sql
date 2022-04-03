@@ -72,5 +72,11 @@ insert into produto (nome, descricao, preco, ativo, restaurante_id) values ('San
 
 insert into produto (nome, descricao, preco, ativo, restaurante_id) values ('Espetinho de Cupim', 'Acompanha farinha, mandioca e vinagrete', 8, 1, 6);
 
+insert into usuario(nome, email, senha, data_cadastro) values ("jaum", "jaum@teste.com", "$2a$12$2Ya2MUEytkxSUuEKSk3dpe7au.zcH0YQtOgkerlIQ.gsNR8QlbWIO", "2022-04-03");
+insert into usuario(nome, email, senha, data_cadastro) values ("maria", "maria@teste.com", "$2a$12$2Ya2MUEytkxSUuEKSk3dpe7au.zcH0YQtOgkerlIQ.gsNR8QlbWIO", "2022-04-03");
+insert into usuario(nome, email, senha, data_cadastro) values ("joaquin", "joaquin@teste.com", "$2a$12$2Ya2MUEytkxSUuEKSk3dpe7au.zcH0YQtOgkerlIQ.gsNR8QlbWIO", "2022-04-03");
+insert into usuario(nome, email, senha, data_cadastro) values ("josefa", "josefa@teste.com", "$2a$12$2Ya2MUEytkxSUuEKSk3dpe7au.zcH0YQtOgkerlIQ.gsNR8QlbWIO", "2022-04-03");
+insert into usuario(nome, email, senha, data_cadastro) values ("quitera", "quitera@teste.com", "$2a$12$2Ya2MUEytkxSUuEKSk3dpe7au.zcH0YQtOgkerlIQ.gsNR8QlbWIO", "2022-04-03");
+
 
 
