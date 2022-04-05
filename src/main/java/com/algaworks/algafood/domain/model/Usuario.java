@@ -36,4 +36,8 @@ public class Usuario {
                 inverseJoinColumns = @JoinColumn(name = "grupo_id"))
     private List<Grupo> grupos = new ArrayList<>();
 
+    public boolean isNovo(){
+        return getId() == null;
+    }
+
 }
