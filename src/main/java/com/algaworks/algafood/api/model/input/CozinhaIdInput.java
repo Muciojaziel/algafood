@@ -11,4 +11,5 @@ public class CozinhaIdInput {
 
     @NotNull
     private Long id;
+
 }

@@ -15,7 +15,7 @@ public class FormaPagamentoAssembler {
     @Autowired
     ModelMapper modelMapper;
 
-    private FormaPagamentoModel toModel(FormaPagamento formaPagamento) {
+    public FormaPagamentoModel toModel(FormaPagamento formaPagamento) {
         return modelMapper.map(formaPagamento, FormaPagamentoModel.class);
     }
 
