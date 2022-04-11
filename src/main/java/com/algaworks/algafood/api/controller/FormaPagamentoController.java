@@ -1,13 +1,14 @@
 package com.algaworks.algafood.api.controller;
 
-import com.algaworks.algafood.api.assembler.FormaPagamentoAssembler;
+import com.algaworks.algafood.api.assembler.FormaPagamentoModelAssembler;
+import com.algaworks.algafood.api.assembler.input.FormaPagamentoInputDisassembler;
 import com.algaworks.algafood.api.model.FormaPagamentoModel;
+import com.algaworks.algafood.api.model.input.FormaPagamentoInput;
 import com.algaworks.algafood.domain.exception.FormaPagamentoNaoEncontradaException;
 import com.algaworks.algafood.domain.exception.NegocioException;
 import com.algaworks.algafood.domain.model.FormaPagamento;
 import com.algaworks.algafood.domain.repository.FormaPagamentoRepository;
 import com.algaworks.algafood.domain.service.CadastroFormaPagamentoService;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -25,28 +26,34 @@ public class FormaPagamentoController {
     private FormaPagamentoRepository formaPagamentoRepository;
 
     @Autowired
-    private FormaPagamentoAssembler formaPagamentoAssembler;
+    private FormaPagamentoModelAssembler formaPagamentoModelAssembler;
 
     @Autowired
-    private CadastroFormaPagamentoService formaPagamentoService;
+    private FormaPagamentoInputDisassembler formaPagamentoInputDisassembler;
+
+    @Autowired
+    private CadastroFormaPagamentoService cadastroFormaPagamento;
 
     @Autowired
     private ModelMapper modelMapper;
 
     @GetMapping()
-    public List<FormaPagamentoModel> listar() { return formaPagamentoAssembler.toCollectionModel(formaPagamentoRepository.findAll()); }
+    public List<FormaPagamentoModel> listar() { return formaPagamentoModelAssembler.toCollectionModel(formaPagamentoRepository.findAll()); }
 
 
     @GetMapping("/{formaPagamentoId}")
     public FormaPagamentoModel buscar(@PathVariable Long formaPagamentoId) {
-      return formaPagamentoAssembler.toModel(formaPagamentoService.buscarOuFalhar(formaPagamentoId));
+      return formaPagamentoModelAssembler.toModel(cadastroFormaPagamento.buscarOuFalhar(formaPagamentoId));
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public FormaPagamentoModel adicionar(@RequestBody @Valid FormaPagamento formaPagamento){
+    public FormaPagamentoModel adicionar(@RequestBody @Valid FormaPagamentoInput formaPagamentoInput){
         try{
-            return  formaPagamentoAssembler.toModel(formaPagamentoService.salvar(formaPagamento));
+            FormaPagamento formaPagamento = formaPagamentoInputDisassembler.toDomainObject(formaPagamentoInput);
+
+//            formaPagamento = cadastroFormaPagamento.salvar(formaPagamento);
+            return formaPagamentoModelAssembler.toModel(cadastroFormaPagamento.salvar(formaPagamento));
 
         } catch (FormaPagamentoNaoEncontradaException e) {
            throw new NegocioException(e.getMessage());
@@ -55,20 +62,24 @@ public class FormaPagamentoController {
 
     @PutMapping("/{formaPagamentoId}")
     @ResponseStatus
-    public FormaPagamentoModel atualizar(@PathVariable Long formaPagamentoId, @RequestBody @Valid FormaPagamento formaPagamento){
+    public FormaPagamentoModel atualizar(@PathVariable Long formaPagamentoId, @RequestBody @Valid FormaPagamentoInput formaPagamentoInput){
         try {
-            FormaPagamento formaPagamentoAtual = formaPagamentoService.buscarOuFalhar(formaPagamentoId);
-            copyToModel( formaPagamentoAtual, formaPagamento);
+            FormaPagamento formaPagamentoAtual = cadastroFormaPagamento.buscarOuFalhar(formaPagamentoId);
 
-            return formaPagamentoAssembler.toModel(formaPagamentoService.salvar(formaPagamentoAtual));
+            formaPagamentoInputDisassembler.copyToDomainObject(formaPagamentoInput, formaPagamentoAtual);
+
+            //            formaPagamentoAtual = cadastroFormaPagamento.salvar(formaPagamentoAtual);
+            return formaPagamentoModelAssembler.toModel(cadastroFormaPagamento.salvar(formaPagamentoAtual));
 
         } catch (FormaPagamentoNaoEncontradaException e){
             throw new NegocioException(e.getMessage());
         }
     }
 
-    private void copyToModel(FormaPagamento formaPagamento, FormaPagamento formaPagamentoAtual) {
-        modelMapper.map( formaPagamentoAtual, formaPagamento);
+    @DeleteMapping("/{formaPagamentoId}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void remover(@PathVariable Long formaPagamentoId){
+        cadastroFormaPagamento.excluir(formaPagamentoId);
     }
 
 }
