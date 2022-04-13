@@ -39,6 +39,4 @@ public class CadastroFormaPagamentoService {
         return formaPagamentoRepository.findById(formaPagamentoId)
                 .orElseThrow(() -> new FormaPagamentoNaoEncontradaException(formaPagamentoId));
     }
-
-
 }

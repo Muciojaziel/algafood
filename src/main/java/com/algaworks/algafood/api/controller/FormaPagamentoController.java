@@ -81,5 +81,4 @@ public class FormaPagamentoController {
     public void remover(@PathVariable Long formaPagamentoId){
         cadastroFormaPagamento.excluir(formaPagamentoId);
     }
-
 }
