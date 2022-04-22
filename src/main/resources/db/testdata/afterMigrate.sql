@@ -74,6 +74,10 @@ insert into produto (nome, descricao, preco, ativo, restaurante_id) values ('Esp
 
 insert into grupo (nome) values ('Gerente'), ('Vendedor'), ('Secretária'), ('Cadastrador');
 
-
+insert into usuario (id, nome, email, senha, data_cadastro) values
+(1, 'Jose Bonifaço', 'bonifas@globo.com', '123', utc_timestamp),
+(2, 'Abenebaldo Pacholinha', 'pacholas@tech.com', '123', utc_timestamp),
+(3, 'Maria Xuaquina', 'xuas@globo.com', '123', utc_timestamp),
+(4, 'Bené Atrofio', 'atrofio@globo.com', '123', utc_timestamp);
 
 
