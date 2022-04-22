@@ -4,12 +4,13 @@ import com.algaworks.algafood.api.assembler.UsuarioModelAssembler;
 import com.algaworks.algafood.api.assembler.input.UsuarioInputDissambler;
 import com.algaworks.algafood.api.model.UsuarioModel;
 import com.algaworks.algafood.domain.repository.UsuarioRepository;
+import com.algaworks.algafood.domain.service.CadastroUsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -25,8 +26,18 @@ public class UsuarioController {
     @Autowired
     private UsuarioInputDissambler usuarioInputDissambler;
 
+    @Autowired
+    private CadastroUsuarioService cadastroUsuarioService;
+
+
     @GetMapping
     public List<UsuarioModel> listar(){ return usuarioModelAssembler.toCollectionModel(usuarioRepository.findAll()); }
+
+    @GetMapping("/{usuarioId}")
+    @ResponseStatus(HttpStatus.OK)
+    public UsuarioModel buscar(@PathVariable @Valid Long usuarioId){
+        return usuarioModelAssembler.toModel(cadastroUsuarioService.buscarOuFalhar(usuarioId));
+    }
 
 
 }
