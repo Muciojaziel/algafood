@@ -10,7 +10,7 @@ import java.util.List;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Data
 @Entity
-public class Grupo {
+public class  Grupo {
 
     @EqualsAndHashCode.Include
     @Id
@@ -18,7 +18,7 @@ public class Grupo {
     private Long id;
 
     @Column(nullable = false)
-    private String descricao;
+    private String nome;
 
     @ManyToMany
     @JoinTable(name = "grupo_permissao",
