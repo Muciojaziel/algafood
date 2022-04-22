@@ -1,5 +1,6 @@
 package com.algaworks.algafood.domain.service;
 
+import com.algaworks.algafood.api.model.input.UsuarioComSenhaInput;
 import com.algaworks.algafood.domain.exception.EntidadeEmUsoException;
 import com.algaworks.algafood.domain.exception.EntidadeNaoEncontradaException;
 import com.algaworks.algafood.domain.exception.NegocioException;
@@ -36,6 +37,17 @@ public class CadastroUsuarioService {
         } catch (DataIntegrityViolationException e ){
             throw new EntidadeEmUsoException(String.format(MSG_USUARIO_EM_USO, usuarioId));
         }
+    }
+
+    @Transactional
+    public void alterarSenha(Long usuarioId, String senhaAtual, String novaSenha){
+        Usuario usuario = buscarOuFalhar(usuarioId);
+        if(usuario.senhaNaoCoincideCom(senhaAtual)){
+            throw new NegocioException("Senha atual informada não coincide com a senha do usuário.");
+        }
+
+        usuario.setSenha(novaSenha);
+
     }
 
     public Usuario buscarOuFalhar(Long usuarioId){
