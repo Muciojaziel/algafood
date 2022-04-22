@@ -75,3 +75,5 @@ insert into produto (nome, descricao, preco, ativo, restaurante_id) values ('Esp
 insert into grupo (nome) values ('Gerente'), ('Vendedor'), ('Secretária'), ('Cadastrador');
 
 
+
+
