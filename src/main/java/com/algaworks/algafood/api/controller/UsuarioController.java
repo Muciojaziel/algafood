@@ -3,6 +3,8 @@ package com.algaworks.algafood.api.controller;
 import com.algaworks.algafood.api.assembler.UsuarioModelAssembler;
 import com.algaworks.algafood.api.assembler.input.UsuarioInputDissambler;
 import com.algaworks.algafood.api.model.UsuarioModel;
+import com.algaworks.algafood.api.model.input.UsuarioInput;
+import com.algaworks.algafood.domain.model.Usuario;
 import com.algaworks.algafood.domain.repository.UsuarioRepository;
 import com.algaworks.algafood.domain.service.CadastroUsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +39,14 @@ public class UsuarioController {
     @ResponseStatus(HttpStatus.OK)
     public UsuarioModel buscar(@PathVariable @Valid Long usuarioId){
         return usuarioModelAssembler.toModel(cadastroUsuarioService.buscarOuFalhar(usuarioId));
+    }
+
+    @PostMapping()
+    @ResponseStatus(HttpStatus.CREATED)
+    public UsuarioModel adicionar(@RequestBody @Valid UsuarioInput usuarioInput){
+        Usuario usuario = usuarioInputDissambler.toDomainObject(usuarioInput);
+
+        return usuarioModelAssembler.toModel(cadastroUsuarioService.salvar(usuario));
     }
 
 
