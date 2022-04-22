@@ -9,8 +9,6 @@ import javax.validation.constraints.NotBlank;
 @Setter
 public class GrupoInput {
 
-    private Long id;
-
     @NotBlank
     private String nome;
 
