@@ -24,10 +24,12 @@ public class CadastroUsuarioService {
     @Autowired
     private UsuarioRepository usuarioRepository;
 
-
+    @Autowired
+    private EntityManager em;
 
     @Transactional
     public Usuario salvar(Usuario usuario){
+        em.detach(usuario);
 
         Optional<Usuario> usuarioExistente = usuarioRepository.findByEmail(usuario.getEmail());
 
