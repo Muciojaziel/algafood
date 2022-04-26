@@ -9,7 +9,9 @@ import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Data
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
@@ -48,7 +50,7 @@ public class Restaurante {
 	@JoinTable(name = "restaurante_forma_pagamento",
 					joinColumns = @JoinColumn(name = "restaurante_id"),
 					inverseJoinColumns = @JoinColumn(name = "forma_pagamento_id"))
-	private List<FormaPagamento> formasPagamento = new ArrayList<>();
+	private Set<FormaPagamento> formasPagamento = new HashSet<>();
 
 	@OneToMany(mappedBy = "restaurante")
 	private List<Produto> produtos = new ArrayList<>();
@@ -63,6 +65,10 @@ public class Restaurante {
 
 	public boolean removerFormaPagamento(FormaPagamento formaPagamento){
 		return getFormasPagamento().remove(formaPagamento);
+	}
+
+	public boolean adicionarFormaPagamento(FormaPagamento formaPagamento){
+		return getFormasPagamento().add(formaPagamento);
 	}
 }
 
