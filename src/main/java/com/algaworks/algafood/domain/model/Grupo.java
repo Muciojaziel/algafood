@@ -26,5 +26,13 @@ public class  Grupo {
     @JoinTable(name = "grupo_permissao",
             joinColumns = @JoinColumn(name = "grupo_id"),
             inverseJoinColumns = @JoinColumn(name = "permissao_id"))
-    private Set<Permissao> permissao = new HashSet<>();
+    private Set<Permissao> permissoes = new HashSet<>();
+
+    public boolean removerPermissao(Permissao permissao) {
+        return getPermissoes().remove(permissao);
+    }
+
+    public boolean adicionarPermissao(Permissao permissao) {
+        return getPermissoes().add(permissao);
+    }
 }
