@@ -1,20 +1,15 @@
 package com.algaworks.algafood.api.controller;
 
 import com.algaworks.algafood.api.assembler.UsuarioModelAssembler;
-import com.algaworks.algafood.api.assembler.input.UsuarioInputDissambler;
+import com.algaworks.algafood.api.assembler.input.UsuarioInputDisassembler;
 import com.algaworks.algafood.api.model.UsuarioModel;
 import com.algaworks.algafood.api.model.input.SenhaInput;
 import com.algaworks.algafood.api.model.input.UsuarioComSenhaInput;
 import com.algaworks.algafood.api.model.input.UsuarioInput;
-import com.algaworks.algafood.domain.exception.EntidadeNaoEncontradaException;
-import com.algaworks.algafood.domain.exception.NegocioException;
-import com.algaworks.algafood.domain.exception.UsuarioNaoEncontradoException;
 import com.algaworks.algafood.domain.model.Usuario;
 import com.algaworks.algafood.domain.repository.UsuarioRepository;
 import com.algaworks.algafood.domain.service.CadastroUsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -33,7 +28,7 @@ public class UsuarioController {
     private UsuarioModelAssembler usuarioModelAssembler;
 
     @Autowired
-    private UsuarioInputDissambler usuarioInputDissambler;
+    private UsuarioInputDisassembler usuarioInputDissambler;
 
     @Autowired
     private CadastroUsuarioService cadastroUsuarioService;

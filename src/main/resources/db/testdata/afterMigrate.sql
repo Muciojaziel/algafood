@@ -1,19 +1,20 @@
-set FOREIGN_key_checks = 0;
+set foreign_key_checks = 0;
 
-DELETE FROM cidade;
-DELETE FROM cozinha;
-DELETE FROM estado;
-DELETE FROM forma_pagamento;
-DELETE FROM grupo;
-DELETE FROM grupo_permissao;
-DELETE FROM permissao;
-DELETE FROM produto;
-DELETE FROM restaurante;
-DELETE FROM restaurante_forma_pagamento;
-DELETE FROM usuario;
-DELETE FROM usuario_grupo;
+delete from cidade;
+delete from cozinha;
+delete from estado;
+delete from forma_pagamento;
+delete from grupo;
+delete from grupo_permissao;
+delete from permissao;
+delete from produto;
+delete from restaurante;
+delete from restaurante_forma_pagamento;
+delete from restaurante_usuario_responsavel;
+delete from usuario;
+delete from usuario_grupo;
 
-set FOREIGN_key_checks = 1;
+set foreign_key_checks = 1;
 
 alter table cidade auto_increment = 1;
 alter table cozinha auto_increment = 1;
@@ -71,14 +72,18 @@ insert into produto (nome, descricao, preco, ativo, restaurante_id) values ('San
 
 insert into produto (nome, descricao, preco, ativo, restaurante_id) values ('Espetinho de Cupim', 'Acompanha farinha, mandioca e vinagrete', 8, 1, 6);
 
+
 insert into grupo (id, nome) values (1, 'Gerente'), (2, 'Vendedor'), (3, 'Secretária'), (4, 'Cadastrador');
 
 insert into grupo_permissao (grupo_id, permissao_id) values (1, 1), (1, 2), (2, 1), (2, 2), (3, 1);
 
 insert into usuario (id, nome, email, senha, data_cadastro) values
-(1, 'Jose Bonifaço', 'bonifas@globo.com', '123', utc_timestamp),
-(2, 'Abenebaldo Pacholinha', 'pacholas@tech.com', '123', utc_timestamp),
-(3, 'Maria Xuaquina', 'xuas@globo.com', '123', utc_timestamp),
-(4, 'Bené Atrofio', 'atrofio@globo.com', '123', utc_timestamp);
+                                                                (1, 'João da Silva', 'joao.ger@algafood.com', '123', utc_timestamp),
+                                                                (2, 'Maria Joaquina', 'maria.vnd@algafood.com', '123', utc_timestamp),
+                                                                (3, 'José Souza', 'jose.aux@algafood.com', '123', utc_timestamp),
+                                                                (4, 'Sebastião Martins', 'sebastiao.cad@algafood.com', '123', utc_timestamp),
+                                                                (5, 'Manoel Lima', 'manoel.loja@gmail.com', '123', utc_timestamp);
 
 insert into usuario_grupo (usuario_id, grupo_id) values (1, 1), (1, 2), (2, 2);
+
+insert into restaurante_usuario_responsavel (restaurante_id, usuario_id) values (1, 5), (3, 5);
