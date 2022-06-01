@@ -21,25 +21,22 @@ public class Pedido {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
-    private BigDecimal subTotal;
-
-    @Column(nullable = false)
-    private BigDecimal taxaFrete;
-
-    @Column(nullable = false)
-    private BigDecimal valorTotal;
+    private BigDecimal subtotal;
+    private BigDecimal taxa_frete;
+    private BigDecimal valor_total;
 
     @Embedded
     private Endereco enderecoEntrega;
 
-    private StatusPedido status;
+    @Enumerated(EnumType.STRING)
+    private StatusPedido status = StatusPedido.CRIADO;
 
     @ManyToOne
     @JoinColumn(nullable = false)
     private FormaPagamento formaPagamento;
 
     @ManyToOne
+    @JoinColumn(nullable = false)
     private Restaurante restaurante;
 
     @ManyToOne
@@ -56,7 +53,20 @@ public class Pedido {
     private OffsetDateTime dataCancelamento;
     private OffsetDateTime dataEntrega;
 
+    public void calcularValorTotal(){
+        this.subtotal = getItens().stream()
+                .map(item -> item.getPrecoTotal())
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
 
+        this.valor_total = this.subtotal.add(this.taxa_frete);
+    }
 
+    public void definirFrete() {
+        setTaxa_frete(getRestaurante().getTaxaFrete());
+    }
+
+    public void atribuirPedidoAosItens() {
+        getItens().forEach(item -> item.setPedido(this));
+    }
 }
 

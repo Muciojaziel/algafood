@@ -5,11 +5,8 @@ import lombok.EqualsAndHashCode;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
@@ -55,5 +52,10 @@ public class Usuario {
 
     public boolean adicionarGrupo(Grupo grupo) {
         return getGrupos().add(grupo);
+    }
+
+    public enum StatusPedido {
+        CRIADO,
+
     }
 }
