@@ -43,7 +43,7 @@ public class Pedido {
     @JoinColumn(name = "usuario_cliente_id", nullable = false)
     private Usuario cliente;
 
-    @OneToMany(mappedBy = "pedido")
+    @OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL)
     private List<ItemPedido> itens = new ArrayList<>();
 
     @CreationTimestamp
@@ -54,6 +54,8 @@ public class Pedido {
     private OffsetDateTime dataEntrega;
 
     public void calcularValorTotal(){
+        getItens().forEach(ItemPedido::calcularPrecoTotal);
+
         this.subtotal = getItens().stream()
                 .map(item -> item.getPrecoTotal())
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
@@ -61,12 +63,5 @@ public class Pedido {
         this.valor_total = this.subtotal.add(this.taxa_frete);
     }
 
-    public void definirFrete() {
-        setTaxa_frete(getRestaurante().getTaxaFrete());
-    }
-
-    public void atribuirPedidoAosItens() {
-        getItens().forEach(item -> item.setPedido(this));
-    }
 }
 
