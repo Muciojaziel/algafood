@@ -9,7 +9,7 @@ import javax.persistence.*;
 public class Endereco {
 
     @Column(name = "endereco_cep")
-    private String nome;
+    private String cep;
 
     @Column(name = "endereco_logradouro")
     private String logradouro;
