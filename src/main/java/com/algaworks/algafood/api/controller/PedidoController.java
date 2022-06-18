@@ -44,29 +44,9 @@ public class PedidoController {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public MappingJacksonValue listar(@RequestParam(required = false) String campos){
-        List<Pedido> pedidos = pedidoRepository.findAll();
-        List<PedidoResumoModel> pedidosResumo = pedidoResumoModelAssembler.toCollectionModel(pedidos);
-
-        MappingJacksonValue pedidosWrapper = new MappingJacksonValue(pedidosResumo);
-
-        SimpleFilterProvider filterProvider = new SimpleFilterProvider();
-        filterProvider.addFilter("pedidoFilter", SimpleBeanPropertyFilter.FilterExceptFilter.serializeAll());
-
-        if(StringUtils.isNotBlank(campos)) {
-            filterProvider.addFilter("pedidoFilter", SimpleBeanPropertyFilter.filterOutAllExcept(campos.split(",")));
-
-        }
-        pedidosWrapper.setFilters(filterProvider);
-
-        return pedidosWrapper;
+    public List<PedidoResumoModel> listar(){
+        return pedidoResumoModelAssembler.toCollectionModel(pedidoRepository.findAll());
     }
-
-//    @GetMapping
-//    @ResponseStatus(HttpStatus.OK)
-//    public List<PedidoResumoModel> listar(){
-//        return pedidoResumoModelAssembler.toCollectionModel(pedidoRepository.findAll());
-//    }
 
     @GetMapping("/{codigoPedido}")
     @ResponseStatus(HttpStatus.OK)
