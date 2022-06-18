@@ -26,8 +26,8 @@ public class Pedido {
     private String codigo;
 
     private BigDecimal subtotal;
-    private BigDecimal taxa_frete;
-    private BigDecimal valor_total;
+    private BigDecimal taxaFrete;
+    private BigDecimal valorTotal;
 
     @Embedded
     private Endereco enderecoEntrega;
@@ -64,7 +64,7 @@ public class Pedido {
                 .map(item -> item.getPrecoTotal())
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
 
-        this.valor_total = this.subtotal.add(this.taxa_frete);
+        this.valorTotal = this.subtotal.add(this.taxaFrete);
     }
 
     public void confirmar() {
