@@ -1,6 +1,6 @@
 package com.algaworks.algafood.api.controller;
 
-import com.algaworks.algafood.api.filter.VendaDiariaFilter;
+import com.algaworks.algafood.domain.filter.VendaDiariaFilter;
 import com.algaworks.algafood.domain.dto.VendaDiaria;
 import com.algaworks.algafood.domain.service.VendaQueryService;
 import org.springframework.beans.factory.annotation.Autowired;
