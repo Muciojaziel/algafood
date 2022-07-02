@@ -20,7 +20,6 @@ public class FotoProdutoInput {
     private MultipartFile arquivo;
 
     @NotBlank
-//    @Filesize(max = "500KB")
     private String descricao;
 
 }
