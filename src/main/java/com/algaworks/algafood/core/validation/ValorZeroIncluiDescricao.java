@@ -1,22 +1,19 @@
-package com.algaworks.algafood.domain.validation;
-
+package com.algaworks.algafood.core.validation;
 
 import javax.validation.Constraint;
-import javax.validation.OverridesAttribute;
 import javax.validation.Payload;
 import javax.validation.constraints.PositiveOrZero;
 import java.lang.annotation.*;
 
-@Target({ElementType.METHOD, ElementType.FIELD, ElementType.ANNOTATION_TYPE, ElementType.CONSTRUCTOR, ElementType.PARAMETER, ElementType.TYPE_USE})
+@Target({ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
-//@Repeatable(PositiveOrZero.List.class)
 @Documented
-@Constraint(validatedBy = {})
-@PositiveOrZero
-public @interface TaxaFrete {
+@Constraint(
+        validatedBy = { ValorZeroIncluiDescricaoValidator.class }
+)
+public @interface ValorZeroIncluiDescricao {
 
-    @OverridesAttribute(constraint = PositiveOrZero.class, name = "message")
-    String message() default "{TaxaFrete.invalida}";
+    String message() default "descrição obrigatória inválida";
 
     Class<?>[] groups() default {};
 
@@ -28,4 +25,8 @@ public @interface TaxaFrete {
     public @interface List {
         PositiveOrZero[] value();
     }
+
+    String valorField();
+    String descricaoField();
+    String descricaoObrigatoria();
 }

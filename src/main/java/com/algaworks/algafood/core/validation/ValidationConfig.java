@@ -1,4 +1,4 @@
-package com.algaworks.algafood.domain.validation;
+package com.algaworks.algafood.core.validation;
 
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
