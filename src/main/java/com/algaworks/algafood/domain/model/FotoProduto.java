@@ -21,7 +21,7 @@ public class FotoProduto {
 
 	private String nomeArquivo;
 	private String descricao;
-	private String contenttype;
-	private Integer tamanho;
+	private String contentType;
+	private Long tamanho;
 
 }
